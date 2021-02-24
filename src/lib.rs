@@ -2,18 +2,18 @@ extern crate proc_macro;
 
 use proc_macro::TokenStream;
 use quote::quote;
-use syn::{Item, ReturnType, parse_macro_input};
+use syn::parse_macro_input;
 
 #[proc_macro_attribute]
 pub fn main(_metadata: TokenStream, input: TokenStream) -> TokenStream {
-    let ast = parse_macro_input!(input as Item);
+    let ast = parse_macro_input!(input as syn::Item);
     let item_fn = match &ast {
-        Item::Fn(ref item_fn) => item_fn,
+        syn::Item::Fn(ref item_fn) => item_fn,
         _ => panic!("expected function, found something else")
     };
 
     let mut fn_output = match item_fn.sig.output.clone() {
-        ReturnType::Type(_, fn_output) => *fn_output,
+        syn::ReturnType::Type(_, fn_output) => *fn_output,
         _ => panic!("expected function to return result")
     };
     let inner_fn_output = fn_output.clone();
