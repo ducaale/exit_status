@@ -1,4 +1,5 @@
 # exit_status
+[![Version info](https://img.shields.io/crates/v/exit_status.svg)](https://crates.io/crates/exit_status)
 
 Simple proc-macro for enabling rust main function to return an exit status code.
 
